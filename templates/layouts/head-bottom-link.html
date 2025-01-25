@@ -1,0 +1,10 @@
+<!-- vendor css -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+@@if(darktheme== 'true'){
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout-dark.css') }}">
+}
+@@if(rtltheme== 'true'){
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout-rtl.css') }}">
+
+}
