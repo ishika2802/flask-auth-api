@@ -1,0 +1,225 @@
+{% include "layouts/head.html" %}
+<!-- <body class=""> -->
+{% block body %}
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">User Profile</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ url_for('views.homePage') }}"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{ url_for('views.userProfile') }}">User Profile</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Basic Component</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="Email">Email address</label>
+                                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="Text">Text</label>
+                                        <input type="text" class="form-control" id="Text" placeholder="123">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="floating-label" for="password">password</label>
+                                        <input type="password" class="form-control" id="password" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> -->
+            <!-- [ form-element ] start -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>User Profile</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- <h5>Form controls</h5>
+                        <hr> -->
+                        <div class="row">
+                                <form  method="POST" action="{{ url_for('views.userProfile') }}" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <div class="image-picker" onclick="document.getElementById('fileInput').click()">
+											<!-- src="{{ profile.image }}" -->
+                                            <img id="preview"  src="{{ url_for('static', filename='uploads/' + profile.image) if profile.image else 'https://source.unsplash.com/150x150/?portrait' }}" alt="Upload Image">
+                                            <!-- <input type="file" id="fileInput" name="image" accept="image/*"> -->
+											<input type="file" id="fileInput" name="image" accept="image/*" style="display: none;">
+                                        </div>   
+                                    </div>                               
+                                    <div class="form-group">
+                                        <label for="exampleInputusername">Username</label>
+                                        <input type="username" class="form-control" id="userName" aria-describedby="username" name="userName" value="{{ profile.userName }}" placeholder="" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" value="{{profile.email}}" placeholder="">
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="countryCode">Country Code</label>
+                                            <select id="countryCode" class="form-control" name="countryCode" value="{{ profile.countryCode }}">
+                                                <option value="+1">+1 (USA)</option>
+                                                <option value="+44">+44 (UK)</option>
+                                                <option value="+91" selected>+91 (India)</option>
+                                                <option value="+61">+61 (Australia)</option>
+                                                <option value="+81">+81 (Japan)</option>
+                                                <option value="+49">+49 (Germany)</option>
+                                                <option value="+33">+33 (France)</option>
+                                                <!-- Add more as needed -->
+                                            </select>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <label for="mobileNumber">Mobile Number</label>
+                                            <input type="tel" class="form-control" id="mobileNumber" name="mobileNumber" value="{{ profile.mobileNumber }}" placeholder="Enter mobile number">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress">Address</label>
+                                        <input type="text" class="form-control" id="address" name="address" value="{{ profile.address }}" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Address 2</label>
+                                        <input type="text" class="form-control" id="address2" name="address2" value="{{ profile.address2 }}" placeholder="">
+                                    </div>
+									<div class="form-group">
+                                        <!-- State Dropdown -->
+                                            <label for="country">Country</label>
+                                            <select id="country" class="form-control" name="country">
+                                                <option value="">Select Country</option>
+                                                <option value="India" {% if profile.country == "India" %}selected{% endif %}>India</option>
+                                                <option value="Australia" {% if profile.country == "Australia" %}selected{% endif %}>Australia</option>
+                                                <option value="USA" {% if profile.country == "USA" %}selected{% endif %}>USA</option>
+                                                <option value="Canada" {% if profile.country == "Canada" %}selected{% endif %}>Canada</option>
+                                                <option value="Africa" {% if profile.country == "Africa" %}selected{% endif %}>Africa</option>
+                                                <!-- Add more states as needed -->
+                                            </select>
+                                    </div>
+                                    <div class="form-group row">
+                                        <!-- State Dropdown -->
+                                        <div class="col-md-4">
+                                            <label for="state">State</label>
+                                            <select id="state" class="form-control" name="state">
+												<option value="">Select State</option>
+												<option value="California" {% if profile.state == "California" %}selected{% endif %}>California</option>
+												<option value="Texas" {% if profile.state == "Texas" %}selected{% endif %}>Texas</option>
+												<option value="New York" {% if profile.state == "New York" %}selected{% endif %}>New York</option>
+												<option value="Florida" {% if profile.state == "Florida" %}selected{% endif %}>Florida</option>
+												<option value="Illinois" {% if profile.state == "Illinois" %}selected{% endif %}>Illinois</option>
+											</select>
+                                        </div>
+										
+                                
+                                        <!-- City Dropdown -->
+                                        <div class="col-md-4">
+                                            <label for="city">City</label>
+                                            <select id="city" class="form-control" name="city" data-saved-city="{{ profile.city }}">
+												{% if profile.city %}
+												<option value="{{ profile.city }}" selected>{{ profile.city }}</option>
+												{% endif %}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="zipCode">Zip Code</label>
+                                            <input type="text" class="form-control" id="zipCode" name="zipCode" value="{{ profile.zipCode }}" placeholder="">
+                                        </div>
+                                    </div>                                
+                                    <button type="submit" class="btn  btn-primary">Update</button>
+                                </form>
+                            </div>
+                        
+                        </div>
+
+                        
+                    </div>
+                    </div>
+            
+            </div>
+            <!-- [ form-element ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+
+    </div>
+</section>
+<!-- [ Main Content ] end -->
+    <!-- Warning Section start -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 11]>
+        <div class="ie-warning">
+            <h1>Warning!!</h1>
+            <p>You are using an outdated version of Internet Explorer, please upgrade
+               <br/>to any of the following web browsers to access this website.
+            </p>
+            <div class="iew-container">
+                <ul class="iew-download">
+                    <li>
+                        <a href="http://www.google.com/chrome/">
+                            <img src="assets/images/browser/chrome.png" alt="Chrome">
+                            <div>Chrome</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.mozilla.org/en-US/firefox/new/">
+                            <img src="assets/images/browser/firefox.png" alt="Firefox">
+                            <div>Firefox</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.opera.com">
+                            <img src="assets/images/browser/opera.png" alt="Opera">
+                            <div>Opera</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.apple.com/safari/">
+                            <img src="assets/images/browser/safari.png" alt="Safari">
+                            <div>Safari</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                            <img src="assets/images/browser/ie.png" alt="">
+                            <div>IE (11 & above)</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <p>Sorry for the inconvenience!</p>
+        </div>
+    <![endif]-->
+    <!-- Warning Section Ends -->
+
+    <!-- Required Js -->
+    <script src="{{ url_for('static', filename='js/pages/image-picker.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pages/dynamic-city.js') }}"></script>
+
+
+{% include "layouts/footer.html" %}
+
+{% endblock %}

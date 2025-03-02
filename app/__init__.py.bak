@@ -20,10 +20,10 @@ def create_app():
     Session(app)
 
     # Initialize MongoDB client
-    mongo_uri = "mongodburl" 
+    mongo_uri = "MONGODBCONNECTIONLINK"
     client = MongoClient(mongo_uri)
     app.mongo_client = client
-    app.db = client['cms']
+    app.db = client['DBNAME']
 
     # Initialize the login manager
     login_manager = LoginManager()
@@ -59,9 +59,9 @@ def create_app():
     app.config['MAIL_PORT'] = 587  # TLS port
     app.config['MAIL_USE_TLS'] = True  # Use TLS instead of SSL
     app.config['MAIL_USE_SSL'] = False  # Set SSL to False
-    app.config['MAIL_USERNAME'] = "user@mail.com"
-    app.config['MAIL_PASSWORD'] = "16 character password"
-    app.config['MAIL_DEFAULT_SENDER'] = "user@mail.com"
+    app.config['MAIL_USERNAME'] = "username@mail.com"
+    app.config['MAIL_PASSWORD'] = "16 character"
+    app.config['MAIL_DEFAULT_SENDER'] = "username@mail.com"
     
     mail = Mail(app)
     mail.init_app(app)
@@ -82,4 +82,4 @@ def create_app():
             if request.endpoint not in ['auth.loginUser', 'auth.registerUser', 'auth.resetUserPassword', 'auth.reset_password', 'static']:
                 return redirect(url_for('auth.loginUser', next=request.url))
 
-    return app  
+    return app  # Returns the Flask application instance
